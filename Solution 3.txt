@@ -168,16 +168,14 @@ on p1.plantid=p2.plantid group by p1.name order by p1.name desc;
  produced per seed planted for each plant type:
 ( (Average Number of Items = Total Amount Picked / Total Seeds Planted.) 
 
-select p1.name,(p3.amount/p2.seeds) as avg_no_of_items from plant p1 join planted 
-p2 on p1.plantid=p2.plantid join picked p3 on  p1.plantid=p3.plantid 
-group by p1.name;
+select p1.name,avg(p3.amount/p2.seeds) as avg_no_of_items from plant p1 join planted p2 on p1.plantid=p2.plantid join picked p3 on  p1.plantid=p3.plantid group by p1.name;
 +--------+-----------------+
 | name   | avg_no_of_items |
 +--------+-----------------+
-| Carrot |          1.0000 |
-| Corn   |          2.6000 |
-| Radish |          0.7667 |
-| Tomato |          0.3947 |
+| Carrot |      1.07142500 |
+| Corn   |      2.33332500 |
+| Radish |      0.76670000 |
+| Tomato |      0.39470000 |
 +--------+-----------------+
 
 8. Write a valid SQL statement that would produce a result set like the following: 
@@ -198,9 +196,16 @@ g.gardenerid=pi.gardenerid join plant p on p.plantid=pi.plantid where g.name='Ti
 
 9. Find out persons who picked from the same location as he/she planted. 
 
+ select distinct g.name from gardener g join picked pi on g.gardenerid=pi.gardenerid join planted p on pi.plantid=p.plantid where pi.gardenerid=p.gardenerid and pi.locationid=p.locationid;
++--------+
+| name   |
++--------+
+| Father |
+| Tim    |
++--------+
 
 10. Create a view that lists all the plant names picked from all locations except
-’West’ in the month of August. 
+Â’WestÂ’ in the month of August. 
 
 select distinct p.name from plant p join picked pi on p.plantid=pi.plantid 
 join location l on l.locationid=pi.locationid where pi.date1 like '2012-08%'

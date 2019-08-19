@@ -63,22 +63,7 @@ select title from movie where director='Steven Spielberg';
 2. Find all years that have a movie that received a rating of 4 or 5, and sort 
 them in increasing order. (1 point possible)
 
-select m.year from movie m join rating r on m.mid=r.mid where r.stars=4 or 
-r.stars=5;
-+------+
-| year |
-+------+
-| 1937 |
-| 1939 |
-| 1981 |
-| 1981 |
-| 1937 |
-| 2009 |
-+------+
-6 rows in set (0.00 sec)
-
-mysql> select distinct m.year from movie m join rating r on m.mid=r.mid 
-where r.stars=4 or r.stars=5;
+select distinct m.year from movie m join rating r on m.mid=r.mid where r.stars=4 or r.stars=5 order by m.year;
 +------+
 | year |
 +------+
